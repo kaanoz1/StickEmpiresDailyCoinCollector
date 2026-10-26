@@ -1,0 +1,17 @@
+[project]
+name = "stick-empires-daily-coin-collection"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Kaan", email = "147401302+kaanoz1@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+stick-empires-daily-coin-collection = "stick_empires_daily_coin_collection:main"
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
