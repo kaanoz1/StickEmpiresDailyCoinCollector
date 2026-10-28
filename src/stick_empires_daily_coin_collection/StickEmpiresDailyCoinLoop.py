@@ -88,7 +88,7 @@ class StickEmpiresDailyCoinCollectorLoop:
                         if diff == 0:
                             await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_coin_amount_not_changed, current_coin_amount)
                             await asyncio.sleep(60 * 60) # Sleep for 1 hour before checking again if empire points changed
-                            break
+                            continue
 
                         await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_coin_amount_changed, diff, current_coin_amount, previous_coin_amount)
                         
