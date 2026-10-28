@@ -1,9 +1,9 @@
 class PreviousStateReader:
     
     @staticmethod
-    def read_previous_state(self) -> int:
+    def read_previous_state() -> int:
         try:
-            with open(self.file_path, "r") as f:
+            with open("previous_coin.txt", "r") as f:
                 return int(f.read())
         except FileNotFoundError:
             return 0

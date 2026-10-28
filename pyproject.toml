@@ -7,7 +7,10 @@ authors = [
     { name = "Kaan", email = "147401302+kaanoz1@users.noreply.github.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "python-dotenv>=1.2.4",
+    "requests>=2.34.2",
+]
 
 [project.scripts]
 stick-empires-daily-coin-collection = "stick_empires_daily_coin_collection:main"
