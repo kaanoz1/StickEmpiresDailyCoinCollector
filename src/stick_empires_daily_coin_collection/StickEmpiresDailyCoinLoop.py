@@ -67,7 +67,6 @@ class StickEmpiresDailyCoinCollectorLoop:
                         await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_loop_timeouted)
                         break
                     empire_points_message = server_connector.get_next_message()
-                    logger.info(f"Message received: {empire_points_message[:100]}")
                     if StickEmpiresEmpirePointTracker.is_empire_points_in_message(empire_points_message):
                         await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_empire_points_found)
                         
@@ -78,18 +77,19 @@ class StickEmpiresDailyCoinCollectorLoop:
                         if diff == 0:
                             await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_coin_amount_not_changed, current_coin_amount)
                             server_connector.close()
-                            await asyncio.sleep(60 * 10) # Sleep for 10 minutes before checking again if empire points changed
+                            await asyncio.sleep(60 * 60) # Sleep for 1 hour before checking again if empire points changed
                             starting_time = time.monotonic() 
                             continue
                         await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_coin_amount_changed, diff, current_coin_amount, previous_coin_amount)
                         
                         PreviousStateReader.save_current_state(current_coin_amount)
-                        await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_new_state_saved)
-                        await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_execution_ended)
+                        await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_new_state_saved, current_coin_amount)
+                        
                         execution_period = execution_period + 30 # Little time so that StickEmpires server would not block the next request.
                         await asyncio.sleep(execution_period)
                         starting_time = time.monotonic()
                         server_connector.close()
+                        await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_execution_ended)
                         continue
                     else:
                         await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_no_empire_points_found)

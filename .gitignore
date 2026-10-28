@@ -1,4 +1,4 @@
-src/stick_empires_daily_coin_collection/__pycache__/
+src/stick_empires_daily_coin_collection/__pycache__/*
 .venv/
 previous_coin.txt
 app.log

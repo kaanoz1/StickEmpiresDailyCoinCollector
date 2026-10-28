@@ -8,9 +8,9 @@ from stick_empires_daily_coin_collection.logger import logger
 async def callback_if_coin_amount_not_changed(current_coin_amount: int) -> None:
     await NtfyService.send_notification(
         title="Stick Empires Daily Coin Collector",
-        message=f"Coin amount has not changed. Going to check again for each 10 minutes. Current balance: {current_coin_amount}"
+        message=f"Coin amount has not changed. Going to check again for each 1 hour. Current balance: {current_coin_amount}"
     )
-    logger.info(f"Coin amount has not changed. Going to check again for each 10 minutes. Current balance: {current_coin_amount}")
+    logger.info(f"Coin amount has not changed. Going to check again for each 1 hour. Current balance: {current_coin_amount}")
 
 async def callback_if_coin_amount_changed(previous_coin_amount: int, current_coin_amount: int, diff: int) -> None:
     await NtfyService.send_notification(
@@ -22,6 +22,7 @@ async def callback_if_coin_amount_changed(previous_coin_amount: int, current_coi
         f"Current: {current_coin_amount} | "
         f"Previous: {previous_coin_amount} | "
         f"Difference: +{diff}"
+        f"New execution will take place within 24 hours. Please wait for the next notification."
     )
 
 def callback_previous_state_fetched(previous_coin_amount: int) -> None:
