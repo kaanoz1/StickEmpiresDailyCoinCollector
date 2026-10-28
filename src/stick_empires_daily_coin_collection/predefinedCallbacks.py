@@ -49,4 +49,9 @@ async def callback_if_empire_points_found() -> None:
     logger.info("Empire points found in the message.")
 
 
-
+async def callback_if_loop_timeouted() -> None:
+    await NtfyService.send_notification(
+        title="Stick Empires Daily Coin Collector",
+        message="Loop timed out. Exiting the loop. Please re-run the program."
+    )
+    logger.warning("Loop timed out. Exiting the loop.")
