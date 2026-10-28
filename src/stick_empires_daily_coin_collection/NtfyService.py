@@ -26,7 +26,6 @@ class NtfyService:
 
         while True:
             try:
-                # Fixed: Added a 10-second timeout to prevent permanent hanging
                 response = requests.post(
                     url,
                     data=message.encode("utf-8"),
