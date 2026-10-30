@@ -80,7 +80,7 @@ class StickEmpiresDailyCoinCollectorLoop:
                             await asyncio.sleep(60 * 60) # Sleep for 1 hour before checking again if empire points changed
                             starting_time = time.monotonic() 
                             continue
-                        await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_coin_amount_changed, diff, current_coin_amount, previous_coin_amount)
+                        await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_coin_amount_changed, previous_coin_amount, current_coin_amount, diff)
                         
                         PreviousStateReader.save_current_state(current_coin_amount)
                         await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_new_state_saved, current_coin_amount)
@@ -100,6 +100,9 @@ class StickEmpiresDailyCoinCollectorLoop:
                     await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_loop_ended)
                 else:
                     await StickEmpiresDailyCoinCollectorLoop._execute_callback(callback_if_login_failed)
+                    logger.error("Login failed. Your login message may be invalid or expired.")
+                    server_connector.close()
+                    break
         except Exception as e:
             print(f"An error occurred: {e}")
         finally:

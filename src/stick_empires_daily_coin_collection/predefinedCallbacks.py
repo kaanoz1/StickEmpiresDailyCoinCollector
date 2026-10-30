@@ -56,3 +56,10 @@ async def callback_if_loop_timeouted() -> None:
         message="Loop timed out. Exiting the loop. Please re-run the program."
     )
     logger.warning("Loop timed out. Exiting the loop.")
+
+async def callback_if_login_failed() -> None:
+    await NtfyService.send_notification(
+        title="Stick Empires Daily Coin Collector",
+        message="Login failed. Your login message may be invalid or expired. Get a new one and re-run the program."
+    )
+    logger.error("Login failed. Exiting the loop.")

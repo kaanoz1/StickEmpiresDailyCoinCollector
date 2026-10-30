@@ -10,10 +10,6 @@ load_dotenv()
 
 NTFY_TOPIC_NAME = os.getenv("NTFY_TOPIC_NAME")
 
-if NTFY_TOPIC_NAME is None:
-    raise ValueError("NTFY_TOPIC_NAME environment variable is not set. Please set it in the .env file.")
-
-
 class NtfyService:
     @staticmethod
     async def send_notification(title: str, message: str) -> None:
@@ -21,6 +17,10 @@ class NtfyService:
         Asynchronously sends a notification to the specified ntfy.sh topic.
         Retries indefinitely every 5 seconds if a network failure occurs.
         """
+        if not NTFY_TOPIC_NAME:
+            logger.debug("NTFY_TOPIC_NAME is not set, skipping notification.")
+            return
+
         url = f"https://ntfy.sh/{NTFY_TOPIC_NAME}"
         headers = {"Title": title.encode("utf-8")}  # Safe encoding for emojis/special chars
 

@@ -14,7 +14,7 @@ dependencies = [
 
 [project.scripts]
 stick-empires-daily-coin-collection = "stick_empires_daily_coin_collection:main"
-start = "stick_empires_daily_coin_collection.main:main"
+   start = "stick_empires_daily_coin_collection.main:run"
 
 [build-system]
 requires = ["uv_build>=0.12.3,<0.13.0"]

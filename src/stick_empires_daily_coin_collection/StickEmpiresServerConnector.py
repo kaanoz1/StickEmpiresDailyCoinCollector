@@ -1,6 +1,6 @@
 import socket
 from stick_empires_daily_coin_collection.utils import CLIENT_LOGIN_MESSAGE_IN_BYTES
-from utils import SERVER_IP, PORT
+from stick_empires_daily_coin_collection.utils import SERVER_IP, PORT
 
 
 class StickEmpiresServerConnector:
