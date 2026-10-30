@@ -1,6 +1,26 @@
+import os
+
+from dotenv import load_dotenv
+
 SERVER_IP: str = "23.23.246.201"
 PORT: int = 9933
 
-## This message below belongs to mock account. You should change it with your own. In later patches, I will add a feature to read this from a config file or environment variable for better security.
-CLIENT_LOGIN_MESSAGE_IN_HEX: str = "8000b91200030001701200040002756e08000c6d6f636b75736572313937340001701200040004667569640400000000000870617373776f72640800206233353964616339646563636266623361356533343236376364393965333864000776657273696f6e080004322e3337000a697346616365626f6f6b010000027a6e080008737469636b7761720002707708002065656531303265303534323138373734303834356362373538366239383531320001630200000161030001"
-CLIENT_LOGIN_MESSAGE_IN_BYTES: bytes = bytes.fromhex(CLIENT_LOGIN_MESSAGE_IN_HEX)
+load_dotenv()
+
+message = os.getenv("LOGIN_MESSAGE_IN_HEX")
+
+if message is None or not message.strip():
+    raise ValueError(
+        "LOGIN_MESSAGE_IN_HEX is not set. Add it to your .env file "
+        "(copy the hex string from login_messages.txt)."
+    )
+
+CLIENT_LOGIN_MESSAGE_IN_HEX: str = message.strip()
+
+try:
+    CLIENT_LOGIN_MESSAGE_IN_BYTES: bytes = bytes.fromhex(CLIENT_LOGIN_MESSAGE_IN_HEX)
+except ValueError as e:
+    raise ValueError(
+        "LOGIN_MESSAGE_IN_HEX is not a valid hex string. "
+        "Make sure you copied the whole line from login_messages.txt without extra characters."
+    ) from e
