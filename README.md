@@ -91,6 +91,10 @@ To use it:
 
 If you do not want notifications, leave `NTFY_TOPIC_NAME` empty in your `.env` and they will be skipped. You can also replace them with another method (Telegram, Discord webhook, e-mail, etc.), the callbacks are yours to change.
 
+## Disclaimer !!!
+
+Automating your account may go against the game's rules. Use this project at your own risk. The author is not responsible for any ban, suspension, loss of coins or any other damage to your account that may result from using it.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
